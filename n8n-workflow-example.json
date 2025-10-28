@@ -1,0 +1,164 @@
+{
+  "name": "Codai RAG Chat Assistant",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chat",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "your-webhook-id"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "user_message",
+              "name": "userMessage",
+              "value": "={{ $json.body.message }}",
+              "type": "string"
+            },
+            {
+              "id": "conversation_history",
+              "name": "history",
+              "value": "={{ $json.body.history }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Extract Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "query",
+        "prompt": "={{ $('Extract Data').item.json.userMessage }}",
+        "options": {
+          "topK": 5
+        }
+      },
+      "name": "Vector Store - Search Docs",
+      "type": "n8n-nodes-base.vectorStore",
+      "typeVersion": 1,
+      "position": [650, 300],
+      "credentials": {
+        "vectorStoreApi": {
+          "id": "your-vector-store-id",
+          "name": "Codai Documentation Vector Store"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "gpt-4",
+        "messages": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are Codai Assistant, a helpful AI assistant that helps users with Codai - an offline AI-powered coding assistant. Use the provided documentation context to answer questions accurately. If you don't know the answer, say so honestly. Be concise but helpful."
+            },
+            {
+              "role": "user",
+              "content": "Context from documentation:\n{{ $json.context }}\n\nConversation history:\n{{ $('Extract Data').item.json.history }}\n\nUser question: {{ $('Extract Data').item.json.userMessage }}"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.7,
+          "maxTokens": 500
+        }
+      },
+      "name": "OpenAI - Generate Response",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "credentials": {
+        "openAiApi": {
+          "id": "your-openai-id",
+          "name": "OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"response\": $json.choices[0].message.content } }}"
+      },
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"response\": \"Sorry, I encountered an error processing your request. Please try again later.\", \"error\": true } }}",
+        "responseCode": 500
+      },
+      "name": "Error Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1050, 500]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Extract Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Data": {
+      "main": [
+        [
+          {
+            "node": "Vector Store - Search Docs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vector Store - Search Docs": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Generate Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Generate Response": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "errorWorkflow": "Error Response"
+  }
+}

@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.linksContainer {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.link:hover {
+  opacity: 1;
+}
+
+.separator {
+  opacity: 0.3;
+}
+
+.copyright {
+  opacity: 0.6;
+}
+
+.authorLink {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+}
+
+.authorLink:hover {
+  text-decoration: underline;
+}

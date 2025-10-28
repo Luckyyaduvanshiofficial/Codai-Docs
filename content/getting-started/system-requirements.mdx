@@ -1,0 +1,421 @@
+import { Callout, Tabs } from 'nextra/components'
+
+# System Requirements
+
+Detailed hardware and software requirements for running CodaiPro optimally across different use cases.
+
+<Callout type="info">
+  CodaiPro is designed to run efficiently even on older hardware, making it perfect for educational environments and budget-conscious users.
+</Callout>
+
+---
+
+## 🖥️ Operating System Requirements
+
+### ✅ Supported Platforms
+
+| Platform | Status | Version |
+|----------|--------|---------|
+| **Windows 10** | ✅ Fully Supported | Build 19041 or later (64-bit) |
+| **Windows 11** | ✅ Fully Supported | All versions (64-bit) |
+| **Windows 8.1** | ⚠️ May Work | Not officially tested |
+| **macOS** | 🔄 Coming Soon | Planned for v3.0 |
+| **Linux** | 🔄 Coming Soon | Planned for v3.0 |
+
+<Callout type="warning">
+  **32-bit Windows is NOT supported.** CodaiPro requires a 64-bit operating system due to memory requirements.
+</Callout>
+
+### Checking Your Windows Version
+
+<Tabs items={['GUI Method', 'PowerShell Method']}>
+  <Tabs.Tab>
+    1. Press **Windows + R**
+    2. Type `winver`
+    3. Press **Enter**
+    4. Check the version number
+  </Tabs.Tab>
+  
+  <Tabs.Tab>
+    ```powershell
+    Get-ComputerInfo | Select WindowsVersion, OsArchitecture
+    ```
+    
+    Should show:
+    - Version: 10.0.xxxxx or higher
+    - Architecture: 64-bit
+  </Tabs.Tab>
+</Tabs>
+
+---
+
+## 🔧 Hardware Requirements
+
+### Minimum Requirements (Basic Use)
+
+| Component | Requirement | Notes |
+|-----------|-------------|-------|
+| **Processor** | Dual-core 2.0 GHz | Intel Core i3 (3rd gen) or AMD equivalent |
+| **RAM** | 4 GB | Minimum for running CodaiPro alone |
+| **Storage** | 2 GB free | For portable installation |
+| **Display** | 1280 x 720 | Minimum resolution for UI |
+
+**Performance expectations:**
+- ⏱️ Startup time: 30-60 seconds
+- 💬 Response time: 10-20 seconds per query
+- 📊 Suitable for: Basic coding tasks, learning, simple scripts
+
+---
+
+### Recommended Requirements (Optimal Experience)
+
+| Component | Requirement | Notes |
+|-----------|-------------|-------|
+| **Processor** | Quad-core 2.5 GHz | Intel Core i5 (6th gen+) or AMD Ryzen 3+ |
+| **RAM** | 8 GB | Allows multitasking while using CodaiPro |
+| **Storage** | 4 GB free (SSD) | SSD significantly improves load times |
+| **Display** | 1920 x 1080 | Full HD for comfortable viewing |
+
+**Performance expectations:**
+- ⏱️ Startup time: 10-20 seconds
+- 💬 Response time: 3-8 seconds per query
+- 📊 Suitable for: Professional development, complex projects, heavy multitasking
+
+---
+
+### High-Performance Setup (Maximum Speed)
+
+| Component | Requirement | Notes |
+|-----------|-------------|-------|
+| **Processor** | 6+ cores, 3.0 GHz+ | Intel Core i7/i9 or AMD Ryzen 7/9 |
+| **RAM** | 16 GB+ | For large codebases and multiple tools |
+| **Storage** | NVMe SSD | Fastest possible I/O |
+| **Display** | 2K/4K | For detailed code viewing |
+
+**Performance expectations:**
+- ⏱️ Startup time: 5-10 seconds
+- 💬 Response time: 2-5 seconds per query
+- 📊 Suitable for: Enterprise use, intensive AI interactions, multiple models
+
+---
+
+## 💾 Storage Breakdown
+
+### Portable Installation Space Usage
+
+```
+Total: ~500 MB
+├── CodaiPro executable: ~200 MB
+├── Python runtime: ~150 MB
+├── AI Models: ~100 MB
+├── Dependencies: ~40 MB
+└── Other files: ~10 MB
+```
+
+### Runtime Memory Usage
+
+| Scenario | RAM Usage | Notes |
+|----------|-----------|-------|
+| **Idle (Just Started)** | 200-400 MB | Application loaded, AI not active |
+| **Active Conversation** | 2-4 GB | AI model loaded in memory |
+| **Peak Usage** | 4-6 GB | Multiple long responses, large context |
+
+<Callout type="tip">
+  **Optimization Tip:** Close other heavy applications (browsers, IDEs) during CodaiPro use if you have limited RAM.
+</Callout>
+
+---
+
+## 🚀 Specific Use Case Requirements
+
+### 📚 University Lab Environment
+
+**Typical Lab Computer Specs:**
+- Intel Core i3 or i5 (older generation)
+- 4-8 GB RAM
+- HDD (not SSD)
+- 1920x1080 display
+
+**CodaiPro Performance:**
+- ✅ Fully functional
+- ⚠️ Slightly slower startup (30-45 sec)
+- ✅ Normal response times (8-15 sec)
+- 💡 Tip: Run from USB with fast read speeds
+
+---
+
+### 🏆 Coding Competition
+
+**Recommended Setup:**
+- Any modern laptop
+- 8 GB+ RAM (for multitasking)
+- SSD preferred
+- Battery life: 4+ hours
+
+**Why:**
+- Fast startup between rounds
+- Quick AI responses under time pressure
+- Can run alongside IDE and browser
+
+---
+
+### 💼 Professional Development
+
+**Recommended Setup:**
+- Desktop or high-end laptop
+- 16 GB+ RAM
+- NVMe SSD
+- Multi-monitor support
+
+**Why:**
+- Handle large codebases
+- Run multiple development tools
+- Frequent, intensive AI queries
+- Professional workflow integration
+
+---
+
+## 🌐 Network Requirements
+
+<Callout type="success">
+  **CodaiPro works 100% offline!** No internet connection required for core functionality.
+</Callout>
+
+### What DOES Require Internet
+
+| Task | Internet Needed | Reason |
+|------|----------------|--------|
+| **Using CodaiPro** | ❌ No | Fully offline AI |
+| **Downloading CodaiPro** | ✅ Yes | Initial download |
+| **Python Installation** | ✅ Yes | Download installer and packages |
+| **Checking for Updates** | ✅ Yes | Manual check on GitHub |
+| **Accessing Documentation** | ⚠️ Optional | Docs available offline in app |
+
+### Offline Capabilities
+
+- ✅ Code generation
+- ✅ Code explanation
+- ✅ Debugging assistance
+- ✅ Algorithm explanations
+- ✅ Multi-language support
+- ✅ All core features
+
+---
+
+## 🔍 Compatibility Check Tool
+
+Run these commands to verify your system:
+
+<Tabs items={['PowerShell', 'Python']}>
+  <Tabs.Tab>
+    ```powershell
+    # Complete system check
+    Write-Host "=== CodaiPro System Compatibility Check ===" -ForegroundColor Cyan
+    
+    # OS Version
+    $os = Get-ComputerInfo | Select WindowsVersion, OsArchitecture
+    Write-Host "`nOS Version: $($os.WindowsVersion)"
+    Write-Host "Architecture: $($os.OsArchitecture)"
+    
+    if ($os.OsArchitecture -ne "64-bit") {
+        Write-Host "❌ 64-bit OS required!" -ForegroundColor Red
+    } else {
+        Write-Host "✅ OS Compatible" -ForegroundColor Green
+    }
+    
+    # RAM
+    $ram = (Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1GB
+    Write-Host "`nTotal RAM: $([math]::Round($ram, 2)) GB"
+    
+    if ($ram -lt 4) {
+        Write-Host "❌ Insufficient RAM (4GB minimum)" -ForegroundColor Red
+    } elseif ($ram -lt 8) {
+        Write-Host "⚠️ Minimum RAM - may be slow" -ForegroundColor Yellow
+    } else {
+        Write-Host "✅ Sufficient RAM" -ForegroundColor Green
+    }
+    
+    # CPU
+    $cpu = Get-CimInstance Win32_Processor
+    Write-Host "`nCPU: $($cpu.Name)"
+    Write-Host "Cores: $($cpu.NumberOfCores)"
+    
+    if ($cpu.NumberOfCores -lt 2) {
+        Write-Host "❌ Dual-core CPU required" -ForegroundColor Red
+    } else {
+        Write-Host "✅ CPU Compatible" -ForegroundColor Green
+    }
+    
+    # Storage
+    $disk = Get-PSDrive C
+    $freeGB = [math]::Round($disk.Free / 1GB, 2)
+    Write-Host "`nFree Storage on C:: $freeGB GB"
+    
+    if ($freeGB -lt 2) {
+        Write-Host "❌ Insufficient storage (2GB minimum)" -ForegroundColor Red
+    } else {
+        Write-Host "✅ Sufficient storage" -ForegroundColor Green
+    }
+    
+    Write-Host "`n=== Check Complete ===" -ForegroundColor Cyan
+    ```
+  </Tabs.Tab>
+  
+  <Tabs.Tab>
+    ```python
+    import platform
+    import psutil
+    import os
+    
+    print("=== CodaiPro System Compatibility Check ===\n")
+    
+    # OS Check
+    print(f"OS: {platform.system()} {platform.release()}")
+    print(f"Architecture: {platform.machine()}")
+    
+    if platform.machine().endswith('64'):
+        print("✅ 64-bit OS")
+    else:
+        print("❌ 32-bit OS (64-bit required)")
+    
+    # RAM Check
+    ram_gb = psutil.virtual_memory().total / (1024**3)
+    print(f"\nTotal RAM: {ram_gb:.2f} GB")
+    
+    if ram_gb < 4:
+        print("❌ Insufficient RAM")
+    elif ram_gb < 8:
+        print("⚠️ Minimum RAM - may be slow")
+    else:
+        print("✅ Sufficient RAM")
+    
+    # CPU Check
+    cpu_count = psutil.cpu_count(logical=False)
+    print(f"\nCPU Cores: {cpu_count}")
+    
+    if cpu_count < 2:
+        print("❌ Insufficient cores")
+    else:
+        print("✅ CPU Compatible")
+    
+    # Storage Check
+    disk = psutil.disk_usage('/')
+    free_gb = disk.free / (1024**3)
+    print(f"\nFree Storage: {free_gb:.2f} GB")
+    
+    if free_gb < 2:
+        print("❌ Insufficient storage")
+    else:
+        print("✅ Sufficient storage")
+    
+    print("\n=== Check Complete ===")
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+---
+
+## 📊 Performance Benchmarks
+
+### Startup Times (Portable Version)
+
+| System Type | SSD | HDD |
+|-------------|-----|-----|
+| **High-end (i7, 16GB)** | 8-12 sec | 20-30 sec |
+| **Mid-range (i5, 8GB)** | 15-20 sec | 35-45 sec |
+| **Low-end (i3, 4GB)** | 25-35 sec | 50-70 sec |
+
+### Response Times
+
+| Query Complexity | Low-end | Mid-range | High-end |
+|------------------|---------|-----------|----------|
+| **Simple** (1 line of code) | 8-12 sec | 4-6 sec | 2-3 sec |
+| **Medium** (function) | 15-20 sec | 8-12 sec | 4-6 sec |
+| **Complex** (class/module) | 30-45 sec | 15-20 sec | 8-12 sec |
+
+<Callout type="info">
+  Response times vary based on Max Length setting and query complexity. Lower settings = faster responses.
+</Callout>
+
+---
+
+## ⚠️ Known Limitations
+
+### Hardware Limitations
+
+1. **32-bit Systems:** Not supported (no workaround)
+2. **Below 4GB RAM:** May crash or freeze frequently
+3. **Very Old CPUs:** (Pre-2010) May be too slow to be practical
+4. **HDD on Low-end:** Expect 1-2 minute startup times
+
+### Software Limitations
+
+1. **Windows 7:** Not supported (OS too old)
+2. **Windows ARM:** Not tested, likely incompatible
+3. **Wine on Linux:** May work but not officially supported
+
+---
+
+## 🔧 Optimization Tips
+
+### For Low-end Systems
+
+1. **Close background applications**
+   ```powershell
+   # Close unnecessary processes
+   Stop-Process -Name "chrome", "firefox", "discord" -Force -ErrorAction SilentlyContinue
+   ```
+
+2. **Reduce Max Length setting**
+   - Set to 300-500 tokens
+   - Faster responses, lower memory usage
+
+3. **Use lower Temperature**
+   - Set to 0.3-0.4
+   - More predictable, faster generation
+
+4. **Increase Virtual Memory**
+   - Control Panel → System → Advanced → Performance Settings
+   - Set to 1.5x your RAM
+
+---
+
+### For SSD Users
+
+1. **Install to SSD** (not HDD)
+   - 3-5x faster startup
+   - Smoother overall experience
+
+2. **Enable TRIM**
+   ```powershell
+   # Check TRIM status
+   fsutil behavior query DisableDeleteNotify
+   
+   # Enable if disabled
+   fsutil behavior set DisableDeleteNotify 0
+   ```
+
+---
+
+## ✅ Pre-Installation Checklist
+
+Before installing CodaiPro, verify:
+
+- [ ] Windows 10/11 (64-bit)
+- [ ] 4+ GB RAM available
+- [ ] 2+ GB free disk space
+- [ ] Dual-core CPU or better
+- [ ] Administrator rights (for initial setup)
+- [ ] Antivirus exclusion configured (optional but recommended)
+- [ ] Latest Windows updates installed
+
+---
+
+<Callout type="success">
+  **Ready to install?** If your system meets the requirements, proceed to the [Installation Guide](/getting-started/installation).
+</Callout>
+
+<Callout type="warning">
+  **System doesn't meet requirements?** CodaiPro might still work but with reduced performance. Consider upgrading RAM or using an SSD for the best experience.
+</Callout>
+

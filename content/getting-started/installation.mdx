@@ -1,0 +1,338 @@
+import { Callout, Steps, Tabs, FileTree, Cards } from 'nextra/components'
+
+# Installation Guide
+
+Complete installation instructions for CodaiPro across different environments and use cases.
+
+<Callout type="info">
+  **Choose your installation method** based on your needs: Portable executable for quick use, Python installation for development, or build from source for customization.
+</Callout>
+
+---
+
+## 📋 System Requirements
+
+Before installing CodaiPro, ensure your system meets these requirements:
+
+### Minimum Requirements
+
+| Component | Requirement |
+|-----------|-------------|
+| **Operating System** | Windows 10 (64-bit) or later |
+| **Processor** | Dual-core 2.0 GHz |
+| **RAM** | 4 GB |
+| **Storage** | 2 GB free disk space |
+| **Display** | 1280 x 720 minimum resolution |
+| **Graphics** | Integrated graphics (no GPU required) |
+
+### Recommended Requirements
+
+| Component | Recommendation |
+|-----------|----------------|
+| **Operating System** | Windows 11 (64-bit) |
+| **Processor** | Quad-core 2.5 GHz or higher |
+| **RAM** | 8 GB or more |
+| **Storage** | 4 GB free disk space (SSD preferred) |
+| **Display** | 1920 x 1080 or higher |
+| **Graphics** | Any modern GPU (optional, improves UI performance) |
+
+<Callout type="warning">
+  **Important:** CodaiPro v2.1 is currently Windows-only. Mac and Linux support is planned for future releases.
+</Callout>
+
+---
+
+## 🎯 Installation Methods
+
+Choose the method that best fits your needs:
+
+### Method Comparison
+
+| Method | Best For | Pros | Cons | Setup Time |
+|--------|----------|------|------|------------|
+| **Portable Executable** | Students, Lab Use | No installation, USB-ready, No admin rights | Windows only | 2 minutes |
+| **Python Installation** | Developers | Customizable, Cross-platform source | Requires Python | 5 minutes |
+| **Build from Source** | Contributors | Full control, Latest features | Most complex | 15 minutes |
+
+---
+
+## 📦 Method 1: Portable Executable (Recommended)
+
+Perfect for students, lab environments, and quick deployment.
+
+<Steps>
+
+### Download the Portable Version
+
+1. Visit the [CodaiPro Releases Page](https://github.com/luckyyaduvanshi/codaipro/releases)
+2. Locate the latest release (v2.1 or newer)
+3. Download **CodaiPro-v2.1-Portable-Windows.zip**
+4. File size: Approximately 500MB
+
+<Callout type="tip">
+  **For Lab Use:** Download directly to a USB drive for maximum portability!
+</Callout>
+
+### Extract the Archive
+
+<Tabs items={['Windows Explorer', 'Using 7-Zip', 'Using WinRAR']}>
+  <Tabs.Tab>
+    **Using Windows Built-in Extractor:**
+    
+    1. Right-click **CodaiPro-v2.1-Portable-Windows.zip**
+    2. Select **"Extract All..."**
+    3. Choose destination:
+       - Desktop: `C:\Users\[YourName]\Desktop\CodaiPro`
+       - USB Drive: `E:\CodaiPro` (adjust drive letter)
+       - Custom folder: Your preferred location
+    4. Check **"Show extracted files when complete"**
+    5. Click **Extract**
+  </Tabs.Tab>
+  
+  <Tabs.Tab>
+    **Using 7-Zip:**
+    
+    1. Right-click **CodaiPro-v2.1-Portable-Windows.zip**
+    2. Select **7-Zip → Extract to "CodaiPro-v2.1-Portable-Windows\\"**
+    3. Files will extract to a new folder automatically
+    
+    <Callout type="info">
+      Download 7-Zip from [7-zip.org](https://www.7-zip.org/) if not installed.
+    </Callout>
+  </Tabs.Tab>
+  
+  <Tabs.Tab>
+    **Using WinRAR:**
+    
+    1. Right-click **CodaiPro-v2.1-Portable-Windows.zip**
+    2. Select **"Extract Here"** or **"Extract to CodaiPro-v2.1-Portable-Windows\\"**
+    3. Wait for extraction to complete
+  </Tabs.Tab>
+</Tabs>
+
+### Verify File Structure
+
+After extraction, your folder should contain:
+
+<FileTree>
+  <FileTree.Folder name="CodaiPro_v21" defaultOpen>
+    <FileTree.File name="CodaiPro_v21.exe" />
+    <FileTree.File name="KILL_V21.bat" />
+    <FileTree.File name="TEST_V21.bat" />
+    <FileTree.File name="README.md" />
+    <FileTree.Folder name="models" defaultOpen>
+      <FileTree.File name="codai-model.gguf" />
+    </FileTree.Folder>
+    <FileTree.Folder name="_internal">
+      <FileTree.File name="[Various dependency files]" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+<Callout type="warning">
+  **Do not separate files!** CodaiPro requires all files in the same directory to function properly.
+</Callout>
+
+### Run CodaiPro
+
+1. Navigate to the extracted folder
+2. Double-click **CodaiPro_v21.exe**
+3. Wait for initialization (10-30 seconds)
+
+**First-time Windows SmartScreen Warning:**
+
+If Windows SmartScreen appears:
+1. Click **"More info"**
+2. Click **"Run anyway"**
+3. This is normal for new executables
+
+<Callout type="success">
+  **Installation Complete!** CodaiPro should now be running. Skip to the [First Launch](#first-launch) section.
+</Callout>
+
+</Steps>
+
+---
+
+## 🐍 Method 2: Python Installation
+
+For developers who want to run CodaiPro from source code.
+
+<Steps>
+
+### Install Python
+
+Ensure Python 3.11 or newer is installed:
+
+<Tabs items={['Check Existing', 'Download Python', 'Using Chocolatey']}>
+  <Tabs.Tab>
+    **Check if Python is installed:**
+    
+    ```powershell
+    python --version
+    ```
+    
+    Should show: `Python 3.11.x` or higher
+    
+    If not installed or version is too old, proceed to download.
+  </Tabs.Tab>
+  
+  <Tabs.Tab>
+    **Download from Python.org:**
+    
+    1. Visit [python.org/downloads](https://www.python.org/downloads/)
+    2. Download **Python 3.11** or newer (64-bit)
+    3. Run installer
+    4. ✅ Check **"Add Python to PATH"**
+    5. Click **Install Now**
+  </Tabs.Tab>
+  
+  <Tabs.Tab>
+    **Using Chocolatey (Windows Package Manager):**
+    
+    ```powershell
+    choco install python --version=3.11.0
+    ```
+    
+    Install Chocolatey first: [chocolatey.org/install](https://chocolatey.org/install)
+  </Tabs.Tab>
+</Tabs>
+
+### Install Git (Optional but Recommended)
+
+<Tabs items={['Check Existing', 'Download Git', 'Using Chocolatey']}>
+  <Tabs.Tab>
+    ```powershell
+    git --version
+    ```
+    
+    If Git is installed, proceed to next step.
+  </Tabs.Tab>
+  
+  <Tabs.Tab>
+    1. Visit [git-scm.com/download](https://git-scm.com/download/win)
+    2. Download Git for Windows
+    3. Run installer with default options
+  </Tabs.Tab>
+  
+  <Tabs.Tab>
+    ```powershell
+    choco install git
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Clone the Repository
+
+<Tabs items={['Using Git', 'Download ZIP']}>
+  <Tabs.Tab>
+    ```powershell
+    # Navigate to your preferred directory
+    cd C:\Projects
+    
+    # Clone the repository
+    git clone https://github.com/luckyyaduvanshi/codaipro.git
+    
+    # Enter the directory
+    cd codaipro
+    ```
+  </Tabs.Tab>
+  
+  <Tabs.Tab>
+    **If you don't have Git:**
+    
+    1. Visit [github.com/luckyyaduvanshi/codaipro](https://github.com/luckyyaduvanshi/codaipro)
+    2. Click **Code → Download ZIP**
+    3. Extract to your preferred location
+    4. Open PowerShell/Command Prompt in that folder
+  </Tabs.Tab>
+</Tabs>
+
+### Install Dependencies
+
+```powershell
+# Install required Python packages
+pip install -r requirements.txt
+```
+
+**Expected packages:**
+- CustomTkinter (GUI framework)
+- FastAPI (Backend server)
+- Uvicorn (ASGI server)
+- llama-cpp-python (AI engine)
+- And other dependencies
+
+<Callout type="info">
+  Installation may take 2-5 minutes depending on your internet speed.
+</Callout>
+
+### Run CodaiPro
+
+```powershell
+python launcher.py
+```
+
+The application should start and open the GUI window.
+
+<Callout type="success">
+  **Python Installation Complete!** You can now run CodaiPro by executing `python launcher.py` anytime.
+</Callout>
+
+</Steps>
+
+---
+
+## 🚀 First Launch
+
+What to expect when running CodaiPro for the first time:
+
+### Startup Sequence
+
+```text
+🔄 Checking for existing CodaiPro instances...
+   → Verifying port 8000 availability
+   → Checking Windows mutex locks
+   → Scanning for process lockfiles
+
+✅ No conflicts detected
+
+🚀 Starting backend server...
+   → Initializing FastAPI server
+   → Binding to localhost:8000
+   → Loading endpoints
+
+⚙️ Loading AI model...
+   → Reading model file: models/codai-model.gguf
+   → Allocating memory: ~2-4GB
+   → Initializing inference engine
+
+🎨 Launching GUI...
+   → Creating CustomTkinter window
+   → Connecting to backend
+   → Loading user preferences
+
+✨ CodaiPro is ready!
+   → Backend server: ✓ Running
+   → AI model: ✓ Loaded
+   → GUI: ✓ Active
+```
+
+**Total startup time:** 10-30 seconds (varies by system)
+
+---
+
+## 🎯 Next Steps
+
+<Cards>
+  <Cards.Card title="📘 Quick Start Guide" href="/getting-started/quick-start" />
+  <Cards.Card title="🎓 First Steps" href="/getting-started/first-steps" />
+  <Cards.Card title="⚙️ Configuration" href="/advanced/configuration" />
+  <Cards.Card title="❓ FAQs" href="/troubleshooting/faqs" />
+</Cards>
+
+---
+
+<Callout type="success">
+  **Installation Complete!** 🎉 You're ready to start coding with AI assistance. Proceed to the [Quick Start Guide](/getting-started/quick-start) to learn the basics.
+</Callout>
+

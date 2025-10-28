@@ -1,0 +1,9 @@
+export default {
+  index: 'Introduction',
+  'getting-started': 'Getting Started',
+  features: 'Features',
+  guides: 'Guides',
+  troubleshooting: 'Troubleshooting',
+  advanced: 'Advanced',
+  api: 'API Reference'
+}

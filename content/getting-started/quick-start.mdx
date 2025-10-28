@@ -1,0 +1,378 @@
+import { Callout, Steps, Tabs } from 'nextra/components'
+
+# Quick Start Guide
+
+Get CodaiPro up and running in under 5 minutes! This guide will walk you through the fastest way to start using your offline AI coding assistant.
+
+<Callout type="info">
+  **New to CodaiPro?** This is the perfect starting point. You'll be generating code with AI in just a few minutes!
+</Callout>
+
+---
+
+## 🎯 What You'll Accomplish
+
+By the end of this guide, you will:
+- ✅ Have CodaiPro installed and running on your system
+- ✅ Understand the basic interface and controls
+- ✅ Generate your first AI-assisted code
+- ✅ Know how to customize AI responses
+
+**Estimated Time:** 5-10 minutes
+
+---
+
+## 📋 Prerequisites
+
+Before you begin, make sure you have:
+
+<Steps>
+
+### Check System Requirements
+
+Ensure your system meets the minimum requirements:
+- **OS:** Windows 10 or 11 (64-bit)
+- **RAM:** 4GB minimum (8GB recommended)
+- **Storage:** 2GB free disk space
+- **CPU:** Dual-core 2.0GHz or higher
+
+<Callout type="warning">
+  CodaiPro currently runs on Windows only. Mac and Linux support is planned for future versions.
+</Callout>
+
+### Download CodaiPro
+
+Get the latest version from GitHub:
+
+1. Visit the [CodaiPro Releases Page](https://github.com/luckyyaduvanshi/codaipro/releases)
+2. Download **CodaiPro-v2.1-Portable-Windows.zip**
+3. File size: ~500MB
+
+<Callout type="tip">
+  Download to your USB drive if you plan to use CodaiPro in lab environments!
+</Callout>
+
+### Extract the Files
+
+1. Right-click the downloaded ZIP file
+2. Select **"Extract All..."**
+3. Choose your destination folder (e.g., `C:\CodaiPro` or USB drive)
+4. Click **Extract**
+
+</Steps>
+
+---
+
+## 🚀 Launch CodaiPro
+
+<Steps>
+
+### Run the Application
+
+1. Navigate to the extracted folder
+2. Find **CodaiPro_v21.exe**
+3. Double-click to launch
+
+<Callout type="info">
+  **First-time users:** Windows SmartScreen might show a warning. Click "More info" then "Run anyway" to continue.
+</Callout>
+
+### Wait for Initialization
+
+You'll see the startup sequence:
+
+```bash
+🔄 Checking for existing CodaiPro instances...
+✅ No conflicts detected
+🚀 Starting backend server...
+⚙️ Loading AI model...
+✨ CodaiPro is ready!
+```
+
+**Typical startup time:** 10-30 seconds (depending on your system)
+
+### Verify the Interface
+
+The CodaiPro window should appear with:
+- **Chat area** on the left (for conversations)
+- **Input box** at the bottom (for your questions)
+- **Settings panel** on the right (for AI customization)
+- **Status bar** showing "Backend server ready!"
+
+</Steps>
+
+---
+
+## 💬 Your First AI Interaction
+
+Let's generate your first piece of code with AI assistance!
+
+<Steps>
+
+### Ask a Simple Question
+
+In the input box at the bottom, type:
+
+```text
+Write a Python function to calculate the factorial of a number
+```
+
+Then press **Enter** or click **Send**.
+
+### Watch the AI Respond
+
+Within seconds, you'll see the AI generating a response like:
+
+```python
+def factorial(n):
+    """
+    Calculate the factorial of a number.
+    
+    Args:
+        n (int): A non-negative integer
+    
+    Returns:
+        int: The factorial of n
+    """
+    if n < 0:
+        raise ValueError("Factorial is not defined for negative numbers")
+    elif n == 0 or n == 1:
+        return 1
+    else:
+        result = 1
+        for i in range(2, n + 1):
+            result *= i
+        return result
+
+# Example usage
+print(factorial(5))  # Output: 120
+```
+
+### Copy and Use the Code
+
+Click anywhere in the code block and press **Ctrl+C** to copy, then paste it into your IDE!
+
+</Steps>
+
+<Callout type="success">
+  **Congratulations!** You've just used AI to generate your first piece of code with CodaiPro!
+</Callout>
+
+---
+
+## ⚙️ Customize Your Experience
+
+Now let's explore the settings to get better results for your specific needs.
+
+### Understanding the Settings Panel
+
+Located on the right side of the interface:
+
+#### 🌡️ Temperature (0.1 - 1.0)
+
+Controls the creativity vs. accuracy of responses:
+
+- **0.1 - 0.3:** Very precise, deterministic (best for debugging)
+- **0.4 - 0.6:** Balanced (recommended for most tasks)
+- **0.7 - 1.0:** Creative, varied solutions (best for brainstorming)
+
+<Callout type="tip">
+  **Recommendation:** Start with **0.5** for a good balance between accuracy and creativity.
+</Callout>
+
+#### 📏 Max Length (100 - 2000 tokens)
+
+Controls how long the AI's responses will be:
+
+- **100 - 500:** Brief answers, quick responses
+- **500 - 1000:** Standard explanations (recommended)
+- **1000 - 2000:** Detailed, comprehensive answers
+
+<Callout type="info">
+  One token ≈ 4 characters. A 500-token response is roughly 2000 characters or ~300 words.
+</Callout>
+
+#### 🎭 System Instructions
+
+Custom instructions to shape AI behavior. Examples:
+
+```text
+You are a helpful coding tutor. Explain concepts clearly for beginners.
+```
+
+```text
+Provide production-ready code with error handling and documentation.
+```
+
+```text
+Focus on performance optimization and best practices.
+```
+
+---
+
+## 🎯 Try Different Scenarios
+
+Now that you're set up, try these common use cases:
+
+<Tabs items={['Code Generation', 'Debugging', 'Explanation', 'Optimization']}>
+  <Tabs.Tab>
+    **Generate Code from Description**
+    
+    ```text
+    Create a JavaScript function that validates email addresses using regex
+    ```
+    
+    The AI will provide a complete, working function with validation logic.
+  </Tabs.Tab>
+  
+  <Tabs.Tab>
+    **Debug Existing Code**
+    
+    ```text
+    Find the bug in this code:
+    
+    def calculate_average(numbers):
+        total = 0
+        for num in numbers:
+            total += num
+        return total / len(numbers)
+    ```
+    
+    The AI will identify issues (e.g., division by zero) and suggest fixes.
+  </Tabs.Tab>
+  
+  <Tabs.Tab>
+    **Understand Complex Code**
+    
+    ```text
+    Explain how this quicksort algorithm works step by step:
+    
+    [paste your code here]
+    ```
+    
+    Get a detailed breakdown of the algorithm's logic and flow.
+  </Tabs.Tab>
+  
+  <Tabs.Tab>
+    **Improve Code Performance**
+    
+    ```text
+    Optimize this code for better performance:
+    
+    [paste your code here]
+    ```
+    
+    Receive suggestions for faster, more efficient implementations.
+  </Tabs.Tab>
+</Tabs>
+
+---
+
+## 🎓 Best Practices for Great Results
+
+### ✅ DO:
+
+1. **Be Specific About Language**
+   ```text
+   ✅ "Write a Python function..."
+   ❌ "Write a function..."
+   ```
+
+2. **Provide Context**
+   ```text
+   ✅ "Create a REST API endpoint in Express.js that handles user registration with email validation"
+   ❌ "Make an API endpoint"
+   ```
+
+3. **Ask Follow-up Questions**
+   ```text
+   "Can you add error handling to the previous function?"
+   "Explain the time complexity of this algorithm"
+   ```
+
+4. **Specify Requirements**
+   ```text
+   "Include comments, error handling, and type hints"
+   "Make it compatible with Python 3.8+"
+   ```
+
+### ❌ DON'T:
+
+1. **Don't Be Vague**
+   - Bad: "Help me with my code"
+   - Good: "Debug this Python function that's returning incorrect values"
+
+2. **Don't Skip Language Specification**
+   - Bad: "Write a sorting function"
+   - Good: "Write a merge sort function in Java"
+
+3. **Don't Paste Huge Code Blocks**
+   - Instead, ask about specific parts or functions
+
+---
+
+## 🔧 Troubleshooting Quick Fixes
+
+### Issue: Slow Responses
+
+**Solution:** Reduce Max Length to 500-800 tokens and close other applications.
+
+### Issue: Application Won't Start
+
+**Solution:** 
+1. Check if another instance is running (Task Manager)
+2. Run `KILL_V21.bat` from the CodaiPro folder
+3. Try again
+
+### Issue: "Port 8000 in use" Error
+
+**Solution:**
+```powershell
+# In PowerShell
+Get-Process -Id (Get-NetTCPConnection -LocalPort 8000).OwningProcess | Stop-Process -Force
+```
+
+<Callout type="info">
+  For more detailed troubleshooting, see the [Troubleshooting Guide](/troubleshooting/common-issues).
+</Callout>
+
+---
+
+## 🎯 Next Steps
+
+Now that you're up and running, explore these guides:
+
+### For Students
+👉 [Lab Environment Setup](/guides/for-students) - Use CodaiPro in university labs
+
+### For Developers
+👉 [Advanced Configuration](/advanced/configuration) - Customize CodaiPro for your workflow
+
+### Learn More Features
+👉 [AI Capabilities](/features/ai-capabilities) - Discover all AI-powered features
+
+### Get Help
+👉 [FAQs](/troubleshooting/faqs) - Common questions answered
+
+---
+
+## 📊 Quick Reference Card
+
+| Task | Command Example | Settings |
+|------|----------------|----------|
+| **Quick Answer** | "Explain list comprehension in Python" | Temp: 0.3, Length: 500 |
+| **Code Generation** | "Create a login form in React" | Temp: 0.5, Length: 1000 |
+| **Debugging** | "Find bugs in this code: [paste]" | Temp: 0.3, Length: 800 |
+| **Learning** | "Explain how binary search works" | Temp: 0.5, Length: 1500 |
+| **Creative Solutions** | "Suggest 3 ways to optimize this" | Temp: 0.8, Length: 1200 |
+
+---
+
+<Callout type="success">
+  **You're all set!** CodaiPro is now your offline AI coding companion. Start building amazing projects! 🚀
+</Callout>
+
+<div style={{ marginTop: '3rem', padding: '1.5rem', background: 'var(--nextra-bg)', borderRadius: '8px', border: '1px solid var(--nextra-border)' }}>
+  <strong>💡 Pro Tip:</strong> Keep CodaiPro open while coding and use it as your personal AI tutor. The more you use it, the better you'll get at crafting effective prompts!
+</div>
+

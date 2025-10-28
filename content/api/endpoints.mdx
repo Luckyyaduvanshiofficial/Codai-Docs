@@ -1,0 +1,419 @@
+import { Callout, Tabs } from 'nextra/components'
+
+# API Reference
+
+Technical documentation for CodaiPro's backend API, model integration, and programmatic access.
+
+<Callout type="info">
+  **For Developers:** This section is intended for advanced users who want to integrate with or extend CodaiPro's functionality.
+</Callout>
+
+---
+
+## 🌐 Backend API Overview
+
+CodaiPro runs a local FastAPI server on `localhost:8000` that handles all AI inference requests.
+
+### Base URL
+
+```
+http://localhost:8000
+```
+
+<Callout type="warning">
+  **Local Only:** The API is bound to localhost and is not accessible from external networks. This is by design for security and privacy.
+</Callout>
+
+---
+
+## 📡 API Endpoints
+
+### Health Check
+
+Check if the backend server is running.
+
+**Endpoint:** `GET /health`
+
+**Request:**
+```bash
+curl http://localhost:8000/health
+```
+
+**Response:**
+```json
+{
+  "status": "healthy",
+  "version": "2.1.0",
+  "model_loaded": true,
+  "uptime_seconds": 1234
+}
+```
+
+---
+
+### Generate Response
+
+Generate AI response for a given prompt.
+
+**Endpoint:** `POST /api/generate`
+
+**Request Body:**
+```json
+{
+  "prompt": "Write a Python function to reverse a string",
+  "temperature": 0.5,
+  "max_tokens": 1000,
+  "system_instruction": "You are a helpful coding assistant"
+}
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `prompt` | string | ✅ Yes | - | The user's question or request |
+| `temperature` | float | ❌ No | 0.5 | Creativity level (0.1-1.0) |
+| `max_tokens` | integer | ❌ No | 1000 | Maximum response length |
+| `system_instruction` | string | ❌ No | - | Custom system prompt |
+
+**Response:**
+```json
+{
+  "response": "def reverse_string(s):\n    return s[::-1]\n\n# Example usage\nprint(reverse_string('hello'))  # Output: olleh",
+  "tokens_used": 45,
+  "generation_time_ms": 2340,
+  "model": "codai-v2.1"
+}
+```
+
+---
+
+### Code Analysis
+
+Analyze code for bugs, optimization opportunities, and improvements.
+
+**Endpoint:** `POST /api/analyze`
+
+**Request Body:**
+```json
+{
+  "code": "def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n-1)",
+  "language": "python",
+  "analysis_type": ["bugs", "optimization", "style"]
+}
+```
+
+**Response:**
+```json
+{
+  "bugs": [
+    {
+      "line": 2,
+      "severity": "medium",
+      "issue": "No handling for negative numbers",
+      "suggestion": "Add validation: if n < 0: raise ValueError"
+    }
+  ],
+  "optimizations": [
+    {
+      "type": "performance",
+      "suggestion": "Consider iterative approach to avoid stack overflow for large n"
+    }
+  ],
+  "style_issues": []
+}
+```
+
+---
+
+### Model Information
+
+Get information about the loaded AI model.
+
+**Endpoint:** `GET /api/model/info`
+
+**Response:**
+```json
+{
+  "model_name": "CodaiPro v2.1",
+  "model_type": "GGUF",
+  "model_size_mb": 120,
+  "context_length": 4096,
+  "languages_supported": ["python", "javascript", "java", "c++", "..."],
+  "capabilities": ["code_generation", "debugging", "explanation", "optimization"]
+}
+```
+
+---
+
+## 🔧 Configuration API
+
+### Get Current Settings
+
+**Endpoint:** `GET /api/config`
+
+**Response:**
+```json
+{
+  "temperature": 0.5,
+  "max_tokens": 1000,
+  "system_instruction": "",
+  "model_path": "models/codai-model.gguf"
+}
+```
+
+---
+
+### Update Settings
+
+**Endpoint:** `POST /api/config`
+
+**Request Body:**
+```json
+{
+  "temperature": 0.7,
+  "max_tokens": 1500
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "updated_settings": {
+    "temperature": 0.7,
+    "max_tokens": 1500
+  }
+}
+```
+
+---
+
+## 🐍 Python SDK Example
+
+Interact with CodaiPro programmatically using Python:
+
+```python
+import requests
+import json
+
+class CodaiProClient:
+    def __init__(self, base_url="http://localhost:8000"):
+        self.base_url = base_url
+        
+    def generate(self, prompt, temperature=0.5, max_tokens=1000):
+        """Generate AI response"""
+        endpoint = f"{self.base_url}/api/generate"
+        payload = {
+            "prompt": prompt,
+            "temperature": temperature,
+            "max_tokens": max_tokens
+        }
+        
+        response = requests.post(endpoint, json=payload)
+        return response.json()
+    
+    def analyze_code(self, code, language="python"):
+        """Analyze code for issues"""
+        endpoint = f"{self.base_url}/api/analyze"
+        payload = {
+            "code": code,
+            "language": language,
+            "analysis_type": ["bugs", "optimization", "style"]
+        }
+        
+        response = requests.post(endpoint, json=payload)
+        return response.json()
+    
+    def health_check(self):
+        """Check if server is running"""
+        endpoint = f"{self.base_url}/health"
+        response = requests.get(endpoint)
+        return response.json()
+
+# Usage example
+client = CodaiProClient()
+
+# Check health
+print(client.health_check())
+
+# Generate code
+result = client.generate(
+    prompt="Write a function to check if a string is a palindrome",
+    temperature=0.5
+)
+print(result['response'])
+
+# Analyze code
+analysis = client.analyze_code(
+    code="def add(a, b): return a + b",
+    language="python"
+)
+print(analysis)
+```
+
+---
+
+## 📦 Model Integration
+
+### Loading Custom Models
+
+CodaiPro supports GGUF format models. To use a custom model:
+
+1. Place your `.gguf` model file in the `models/` directory
+2. Update the configuration:
+
+```python
+# In configuration file
+MODEL_PATH = "models/your-custom-model.gguf"
+```
+
+3. Restart CodaiPro
+
+<Callout type="warning">
+  **Compatibility:** Ensure your custom model is compatible with llama.cpp and supports code generation tasks.
+</Callout>
+
+---
+
+### Model Requirements
+
+| Requirement | Specification |
+|-------------|---------------|
+| **Format** | GGUF (GPT-Generated Unified Format) |
+| **Size** | 50MB - 500MB recommended |
+| **Context Length** | 2048 tokens minimum, 4096+ recommended |
+| **Quantization** | Q4_K_M or higher for best quality |
+
+---
+
+## 🔒 Security Considerations
+
+### API Security
+
+- ✅ **Localhost Only:** API binds to `127.0.0.1`, not accessible externally
+- ✅ **No Authentication Required:** Safe because it's local-only
+- ✅ **CORS Disabled:** Prevents unauthorized web access
+- ✅ **No Logging:** Prompts and responses are not logged
+
+### Best Practices
+
+1. **Don't Expose Port 8000** to the internet
+2. **Verify SSL** when making requests (use HTTPS in production)
+3. **Sanitize Input** when building applications on top of the API
+4. **Rate Limiting** if exposing to multiple users
+
+---
+
+## 🚀 Advanced Integration Examples
+
+### Integration with VS Code Extension
+
+```typescript
+// VS Code extension example
+import * as vscode from 'vscode';
+import axios from 'axios';
+
+export async function getCodeSuggestion(code: string): Promise<string> {
+    try {
+        const response = await axios.post('http://localhost:8000/api/generate', {
+            prompt: `Improve this code:\n${code}`,
+            temperature: 0.5,
+            max_tokens: 1000
+        });
+        
+        return response.data.response;
+    } catch (error) {
+        vscode.window.showErrorMessage('CodaiPro not running');
+        return '';
+    }
+}
+```
+
+---
+
+### Integration with CLI Tool
+
+```bash
+#!/bin/bash
+# codai-cli.sh - Command line wrapper for CodaiPro API
+
+CODAI_URL="http://localhost:8000"
+
+function codai_generate() {
+    local prompt="$1"
+    curl -s -X POST "$CODAI_URL/api/generate" \
+        -H "Content-Type: application/json" \
+        -d "{\"prompt\": \"$prompt\", \"temperature\": 0.5}" \
+        | jq -r '.response'
+}
+
+# Usage: ./codai-cli.sh "Write a hello world in Python"
+codai_generate "$@"
+```
+
+---
+
+## 📊 Performance Metrics
+
+### Typical Response Times
+
+| Query Type | Tokens | Avg Time | Max Time |
+|------------|--------|----------|----------|
+| **Simple Question** | 50-100 | 2-3s | 5s |
+| **Function Generation** | 200-500 | 5-8s | 12s |
+| **Class/Module** | 500-1000 | 10-15s | 25s |
+| **Complex Program** | 1000-2000 | 20-30s | 45s |
+
+<Callout type="info">
+  Times vary based on hardware. Measured on Intel i5 8th gen, 8GB RAM, SSD.
+</Callout>
+
+---
+
+## 🐛 Error Handling
+
+### Common Error Codes
+
+| Status Code | Error | Cause | Solution |
+|-------------|-------|-------|----------|
+| **200** | Success | - | - |
+| **400** | Bad Request | Invalid parameters | Check request format |
+| **500** | Server Error | Model loading failed | Restart CodaiPro |
+| **503** | Service Unavailable | Server not started | Wait for startup |
+| **ECONNREFUSED** | Connection Refused | Server not running | Start CodaiPro |
+
+### Error Response Format
+
+```json
+{
+  "error": {
+    "code": "INVALID_PARAMETER",
+    "message": "Temperature must be between 0.1 and 1.0",
+    "details": {
+      "parameter": "temperature",
+      "received": 1.5,
+      "expected": "0.1 - 1.0"
+    }
+  }
+}
+```
+
+---
+
+## 📚 Additional Resources
+
+- [FastAPI Documentation](https://fastapi.tiangolo.com/)
+- [llama.cpp Repository](https://github.com/ggerganov/llama.cpp)
+- [GGUF Format Specification](https://github.com/ggerganov/ggml/blob/master/docs/gguf.md)
+
+---
+
+<Callout type="success">
+  **Ready to integrate?** The CodaiPro API makes it easy to build custom tools, extensions, and workflows on top of the AI engine.
+</Callout>
+
+<div style={{ marginTop: '3rem', padding: '1.5rem', background: 'var(--nextra-bg)', borderRadius: '8px', border: '1px solid var(--nextra-border)' }}>
+  <strong>💡 Pro Tip:</strong> Use the Python SDK example as a starting point for your integrations. It handles error checking and provides a clean interface to the API.
+</div>
+

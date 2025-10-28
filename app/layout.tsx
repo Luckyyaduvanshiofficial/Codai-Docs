@@ -1,9 +1,9 @@
 import { Footer, Layout, Navbar } from 'nextra-theme-docs'
-import { Head, Search } from 'nextra/components'
+import { Search } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 import { FooterContent } from '../components/Footer'
-import { ChatAssistant } from '../components/chat'
+import { ChatWithHelpButton } from '../components/chat'
 import { chatConfig, isChatEnabled } from '../config/chat.config'
 
 export const metadata = {
@@ -101,14 +101,14 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
-      <Head faviconGlyph="🤖">
+      <head suppressHydrationWarning>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="Content-Language" content="en" />
         <meta name="theme-color" content="#7c3aed" />
         <meta name="msapplication-TileColor" content="#7c3aed" />
         <link rel="manifest" href="/manifest.json" />
-      </Head>
-      <body>
+      </head>
+      <body suppressHydrationWarning>
         <Layout
           navbar={navbar}
           pageMap={await getPageMap()}
@@ -131,7 +131,7 @@ export default async function RootLayout({
         >
           {children}
         </Layout>
-        {isChatEnabled() && <ChatAssistant config={chatConfig} />}
+        {isChatEnabled() && <ChatWithHelpButton config={chatConfig} />}
       </body>
     </html>
   )

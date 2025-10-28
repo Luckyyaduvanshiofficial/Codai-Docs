@@ -3,8 +3,7 @@ import { Search } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 import { FooterContent } from '../components/Footer'
-import { ChatWithHelpButton } from '../components/chat'
-import { chatConfig, isChatEnabled } from '../config/chat.config'
+import { ChatClientWrapper } from '../components/ChatClientWrapper'
 
 export const metadata = {
   metadataBase: new URL('https://docs.codai.pro'),
@@ -131,7 +130,7 @@ export default async function RootLayout({
         >
           {children}
         </Layout>
-        {isChatEnabled() && <ChatWithHelpButton config={chatConfig} />}
+        <ChatClientWrapper />
       </body>
     </html>
   )

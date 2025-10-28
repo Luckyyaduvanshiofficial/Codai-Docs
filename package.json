@@ -29,9 +29,10 @@
   ],
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "cross-env NODE_ENV=development NODE_OPTIONS=\"--max-old-space-size=8192\" next dev",
+    "build": "cross-env NODE_OPTIONS=\"--max-old-space-size=8192 --max-semi-space-size=128\" next build",
+    "start": "next start",
+    "clean": "node -e \"const fs = require('fs'); const path = require('path'); ['.next', '.turbo', 'node_modules/.cache'].forEach(dir => { try { fs.rmSync(dir, { recursive: true, force: true }); console.log('Cleaned:', dir); } catch(e) {} });\""
   },
   "dependencies": {
     "next": "^16.0.0",
@@ -42,6 +43,8 @@
   },
   "devDependencies": {
     "@types/node": "24.9.1",
-    "@types/react": "19.2.2"
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "cross-env": "^10.1.0"
   }
 }

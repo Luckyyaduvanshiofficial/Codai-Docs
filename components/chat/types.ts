@@ -6,6 +6,11 @@ export interface Message {
   isLoading?: boolean
 }
 
+export interface RateLimitConfig {
+  maxRequests: number
+  timeWindow: number // in milliseconds
+}
+
 export interface ChatConfig {
   n8nWebhookUrl: string
   botName?: string
@@ -13,4 +18,13 @@ export interface ChatConfig {
   welcomeMessage?: string
   placeholder?: string
   maxMessages?: number
+  timeout?: number
+  rateLimitConfig?: RateLimitConfig
+  retryAttempts?: number
+  retryDelay?: number
+  persistHistory?: boolean
+  enableAnalytics?: boolean
+  onMessageSent?: (message: string) => void
+  onMessageReceived?: (message: string) => void
+  onError?: (error: Error) => void
 }
